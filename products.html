@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>All Locksmith Products</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #fff;
+    }
+
+    .filter-box {
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .product-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid #eee;
+      transition: 0.2s;
+      height: 100%;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .product-card img {
+      max-height: 180px;
+      object-fit: contain;
+      margin: auto;
+      display: block;
+    }
+
+    .discount-badge {
+      font-size: 0.75rem;
+      background: #680021;
+      color: #fff;
+    }
+
+    .price {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .rating {
+      color: #f5a623;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="header"></div>
+
+  <div class="container py-5">
+    <!-- Title -->
+    <h2 class="text-center fw-bold mb-2">All Locksmith Products</h2>
+    <p class="text-center text-muted mb-5">
+      Shop high-quality key blanks, tools, and locksmith gear. Buy online or contact us for bulk orders.
+    </p>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div class="input-group" style="max-width: 300px;">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search">
+        <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+      </div>
+      <!-- Filter Button opens Modal -->
+      <button class="btn btn-outline-dark d-flex align-items-center gap-2" data-bs-toggle="modal"
+        data-bs-target="#filterModal">
+        <i class="bi bi-funnel"></i> Filters
+      </button>
+    </div>
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-md-3 mb-4">
+        <div class="filter-box border border-3">
+          <h6 class="fw-bold mb-3">Categories</h6>
+          <div><input type="checkbox" class="filter-category me-2" value="Key Blanks"> Key Blanks</div>
+          <div><input type="checkbox" class="filter-category me-2" value="Key Cutting Tools"> Key Cutting Tools</div>
+          <div><input type="checkbox" class="filter-category me-2" value="Transponders"> Transponders</div>
+          <div><input type="checkbox" class="filter-category me-2" value="Key Shells"> Key Shells</div>
+          <div><input type="checkbox" class="filter-category me-2" value="Accessories"> Accessories</div>
+
+          <h6 class="fw-bold mt-4 mb-3">Brands</h6>
+          <div><input type="checkbox" class="filter-brand me-2" value="SILCA"> SILCA</div>
+          <div><input type="checkbox" class="filter-brand me-2" value="Universal"> Universal</div>
+          <div><input type="checkbox" class="filter-brand me-2" value="Ford"> Ford</div>
+          <div><input type="checkbox" class="filter-brand me-2" value="BMW"> BMW</div>
+          <div><input type="checkbox" class="filter-brand me-2" value="Generic"> Generic</div>
+
+          <h6 class="fw-bold mt-4 mb-2">Price Range</h6>
+          <input type="range" id="priceRange" class="form-range" min="0" max="300" step="10" value="300">
+          <small id="priceValue">Up to $300</small>
+        </div>
+      </div>
+
+      <!-- Product Grid -->
+      <div class="col-md-9">
+        <!-- Search & Filters -->
+
+
+        <div id="productGrid" class="row g-4"></div>
+
+        <!-- Pagination -->
+        <nav class="mt-4">
+          <ul class="pagination justify-content-center" id="pagination"></ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter Modal -->
+  <div class="modal fade" id="filterModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Filters</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="filter-box">
+            <h6 class="fw-bold mb-3">Categories</h6>
+            <div><input type="checkbox" class="filter-category me-2" value="Key Blanks"> Key Blanks</div>
+            <div><input type="checkbox" class="filter-category me-2" value="Key Cutting Tools"> Key Cutting Tools</div>
+            <div><input type="checkbox" class="filter-category me-2" value="Transponders"> Transponders</div>
+            <div><input type="checkbox" class="filter-category me-2" value="Key Shells"> Key Shells</div>
+            <div><input type="checkbox" class="filter-category me-2" value="Accessories"> Accessories</div>
+
+            <h6 class="fw-bold mt-4 mb-3">Brands</h6>
+            <div><input type="checkbox" class="filter-brand me-2" value="SILCA"> SILCA</div>
+            <div><input type="checkbox" class="filter-brand me-2" value="Universal"> Universal</div>
+            <div><input type="checkbox" class="filter-brand me-2" value="Ford"> Ford</div>
+            <div><input type="checkbox" class="filter-brand me-2" value="BMW"> BMW</div>
+            <div><input type="checkbox" class="filter-brand me-2" value="Generic"> Generic</div>
+
+            <h6 class="fw-bold mt-4 mb-2">Price Range</h6>
+            <input type="range" id="priceRangeModal" class="form-range " min="0" max="300" step="10" value="300">
+            <small id="priceValueModal">Up to $300</small>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary py-2" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-maroon py-2" data-bs-dismiss="modal">Apply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+
+  <script>
+    // Load header-full.html into #header
+    fetch('header-full.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('header').innerHTML = data)
+      .then(() => {
+        // Highlight active nav link based on current URL after header is loaded
+        const currentPath = window.location.pathname.split('/').pop();
+        const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+        navLinks.forEach(link => {
+          const href = link.getAttribute('href');
+          if (href === currentPath || (href === 'index.html' && currentPath === '')) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      });
+
+    // Load footer.html into #footer
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('footer').innerHTML = data);
+  </script>
+
+  <script>
+    const products = [
+      { name: "3mm Precision Burr", price: 45, category: "Accessories", brand: "Generic", image: "images/products/image 5.png" },
+      { name: "Universal Key Cutting Blade", price: 69, category: "Key Cutting Tools", brand: "Universal", image: "images/products/image 6.png" },
+      { name: "Ford Transponder Key", price: 75, category: "Transponders", brand: "Ford", image: "images/products/image 7.png" },
+      { name: "SILCA NE73TE Key Blank", price: 69, category: "Key Blanks", brand: "SILCA", image: "images/products/image 8.png" },
+      { name: "3-Button Remote Key Shell", price: 69, category: "Key Shells", brand: "Generic", image: "images/products/image 9.png" },
+      { name: "Key Tag & Storage Rings", price: 69, category: "Accessories", brand: "Generic", image: "images/products/image 10.png" },
+      { name: "Anti-Snap Euro Cylinder Lock", price: 69, category: "Accessories", brand: "BMW", image: "images/products/image 23.png" },
+      { name: "High Security Padlock", price: 75, category: "Accessories", brand: "Generic", image: "images/products/image 6.png" },
+    ];
+
+    const productsPerPage = 5;
+    let currentPage = 1;
+
+    function renderProducts() {
+      const grid = document.getElementById("productGrid");
+      grid.innerHTML = "";
+
+      const search = document.getElementById("searchInput").value.toLowerCase();
+      const selectedCategories = [...document.querySelectorAll(".filter-category:checked")].map(cb => cb.value);
+      const selectedBrands = [...document.querySelectorAll(".filter-brand:checked")].map(cb => cb.value);
+      const priceLimit = parseInt(document.getElementById("priceRange").value);
+
+      let filtered = products.filter(p =>
+        p.name.toLowerCase().includes(search) &&
+        (selectedCategories.length === 0 || selectedCategories.includes(p.category)) &&
+        (selectedBrands.length === 0 || selectedBrands.includes(p.brand)) &&
+        p.price <= priceLimit
+      );
+
+      // Show only first 5 products, ignore pagination
+      const paginated = filtered.slice(0, 5);
+
+      paginated.forEach(p => {
+        grid.innerHTML += `
+        <div class="col-md-3">
+          <div class="product-card position-relative">
+            <span class="discount-badge position-absolute top-5 start-5 rounded-pill px-2 py-1">-20%</span>
+            <img src="${p.image}" class="mb-3" alt="${p.name}">
+            <div class="rating mb-1">★★★★★</div>
+            <h6 class="fw-bold">${p.name}</h6>
+            <p class="text-muted small mb-2">Ideal for locksmiths and secure use.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <p class="price">$${p.price}</p>
+            <a href="productdetail.html?name=${encodeURIComponent(p.name)}" class="stretched-link d-flex justify-content-end text-dark">
+              <i class="bi bi-arrow-right fs-5"></i>
+            </a>
+            
+          </div>
+        </div>`;
+      });
+
+      // Remove pagination rendering
+      const pagination = document.getElementById("pagination");
+      pagination.innerHTML = "";
+    }
+
+    function goToPage(page) {
+      // Disabled pagination navigation
+      // currentPage = page;
+      // renderProducts();
+    }
+
+    document.getElementById("searchInput").addEventListener("input", () => { currentPage = 1; renderProducts(); });
+    document.querySelectorAll(".filter-category, .filter-brand").forEach(cb => cb.addEventListener("change", () => { currentPage = 1; renderProducts(); }));
+    document.getElementById("priceRange").addEventListener("input", e => {
+      document.getElementById("priceValue").innerText = "Up to $" + e.target.value;
+      currentPage = 1;
+      renderProducts();
+    });
+
+    renderProducts();
+  </script>
+
+  <!-- Bootstrap icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

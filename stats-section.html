@@ -1,0 +1,41 @@
+i<!-- Stats Section with Animated Numbers -->
+<section class="stats-section" style="display:flex; justify-content: space-around; padding: 40px 0; background: #fff;">
+  <div class="stat-item" style="text-align: center; font-family: Arial, sans-serif;">
+    <div class="stat-number" data-target="10" style="font-weight: 900; font-size: 2.5rem; color: #5a0b2e;">0</div>
+    <div class="stat-label" style="font-weight: 700; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; color: #000;">Experience</div>
+  </div>
+  <div class="stat-item" style="text-align: center; font-family: Arial, sans-serif;">
+    <div class="stat-number" data-target="25" style="font-weight: 900; font-size: 2.5rem; color: #5a0b2e;">0</div>
+    <div class="stat-label" style="font-weight: 700; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; color: #000;">Best Team</div>
+  </div>
+  <div class="stat-item" style="text-align: center; font-family: Arial, sans-serif;">
+    <div class="stat-number" data-target="1000" style="font-weight: 900; font-size: 2.5rem; color: #5a0b2e;">0</div>
+    <div class="stat-label" style="font-weight: 700; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; color: #000;">Total Client</div>
+  </div>
+  <div class="stat-item" style="text-align: center; font-family: Arial, sans-serif;">
+    <div class="stat-number" data-target="24" style="font-weight: 900; font-size: 2.5rem; color: #5a0b2e;">0</div>
+    <div class="stat-label" style="font-weight: 700; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; color: #000;">Emergency Service</div>
+  </div>
+</section>
+
+<script>
+  // Animate numbers from 0 to target
+  document.addEventListener('DOMContentLoaded', () => {
+    const counters = document.querySelectorAll('.stat-number');
+    counters.forEach(counter => {
+      const updateCount = () => {
+        const target = +counter.getAttribute('data-target');
+        const count = +counter.innerText;
+        const increment = target / 200; // Adjust speed here
+
+        if (count < target) {
+          counter.innerText = Math.ceil(count + increment);
+          setTimeout(updateCount, 10);
+        } else {
+          counter.innerText = target;
+        }
+      };
+      updateCount();
+    });
+  });
+</script>
